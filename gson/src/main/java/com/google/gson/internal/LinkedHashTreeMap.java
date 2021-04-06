@@ -216,11 +216,11 @@ public final class LinkedHashTreeMap<K, V> extends AbstractMap<K, V> implements 
    */
   Node<K, V> findByEntry(Entry<?, ?> entry) {
     Node<K, V> mine = findByObject(entry.getKey());
-    boolean valuesEqual = mine != null && equal(mine.value, entry.getValue());
+    boolean valuesEqual = mine != null && LHTMequals(mine.value, entry.getValue());
     return valuesEqual ? mine : null;
   }
-
-  private boolean equal(Object a, Object b) {
+  
+  private boolean LHTMequals(Object a, Object b) {
     return a == b || (a != null && a.equals(b));
   }
 
@@ -344,23 +344,22 @@ public final class LinkedHashTreeMap<K, V> extends AbstractMap<K, V> implements 
 
       int delta = leftHeight - rightHeight;
       if (delta == -2) {
-        Node<K, V> rightLeft = right.left;
-        Node<K, V> rightRight = right.right;
-        int rightRightHeight = rightRight != null ? rightRight.height : 0;
-        int rightLeftHeight = rightLeft != null ? rightLeft.height : 0;
-
-        int rightDelta = rightLeftHeight - rightRightHeight;
-        if (rightDelta == -1 || (rightDelta == 0 && !insert)) {
-          rotateLeft(node); // AVL right right
-        } else {
-          assert (rightDelta == 1);
-          rotateRight(right); // AVL right left
-          rotateLeft(node);
-        }
-        if (insert) {
-          break; // no further rotations will be necessary
-        }
-
+    		Node<K, V> rightLeft = right.left;
+	        Node<K, V> rightRight = right.right;
+	        int rightRightHeight = rightRight != null ? rightRight.height : 0;
+	        int rightLeftHeight = rightLeft != null ? rightLeft.height : 0;
+	
+	        int rightDelta = rightLeftHeight - rightRightHeight;
+	        if (rightDelta == -1 || (rightDelta == 0 && !insert)) {
+	          rotateLeft(node); // AVL right right
+	        } else {
+	          assert (rightDelta == 1);
+	          rotateRight(right); // AVL right left
+	          rotateLeft(node);
+	        }
+	        if (insert) {
+	          break; // no further rotations will be necessary
+	        }
       } else if (delta == 2) {
         Node<K, V> leftLeft = left.left;
         Node<K, V> leftRight = left.right;

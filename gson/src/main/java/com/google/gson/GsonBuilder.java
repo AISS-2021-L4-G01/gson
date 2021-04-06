@@ -81,9 +81,9 @@ public final class GsonBuilder {
   private FieldNamingStrategy fieldNamingPolicy = FieldNamingPolicy.IDENTITY;
   private final Map<Type, InstanceCreator<?>> instanceCreators
       = new HashMap<Type, InstanceCreator<?>>();
-  private final List<TypeAdapterFactory> factories = new ArrayList<TypeAdapterFactory>();
+  private final List<TypeAdapterFactory> factories = new ArrayList<>();
   /** tree-style hierarchy factories. These come after factories for backwards compatibility. */
-  private final List<TypeAdapterFactory> hierarchyFactories = new ArrayList<TypeAdapterFactory>();
+  private final List<TypeAdapterFactory> hierarchyFactories = new ArrayList<>();
   private boolean serializeNulls = DEFAULT_SERIALIZE_NULLS;
   private String datePattern;
   private int dateStyle = DateFormat.DEFAULT;
@@ -429,7 +429,6 @@ public final class GsonBuilder {
    * @since 1.2
    */
   public GsonBuilder setDateFormat(String pattern) {
-    // TODO(Joel): Make this fail fast if it is an invalid date format
     this.datePattern = pattern;
     return this;
   }

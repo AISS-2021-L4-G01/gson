@@ -10,6 +10,12 @@
   <artifactId>gson</artifactId>
   <name>Gson</name>
 
+  <properties>
+  <sonar.projectKey>Alex-GF_gson</sonar.projectKey>
+  <sonar.organization>alex-gf</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
